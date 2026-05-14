@@ -1,114 +1,131 @@
-import { motion } from 'framer-motion';
-import { ShieldCheck, Lock, ScrollText, Network, EyeOff, GitBranch } from 'lucide-react';
-import { siteContent } from '../../data/siteContent';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Lock, Library, Network, ListChecks, RefreshCcw } from 'lucide-react';
 
-const trustPillars = [
+interface Pillar {
+  n: string;
+  Icon: typeof Lock;
+  title: string;
+  body: string;
+  why: string;
+}
+
+const pillars: Pillar[] = [
   {
-    Icon: ShieldCheck,
-    title: 'Bounded AI Systems',
-    desc: 'Every AI surface ships inside expert-defined intent boundaries, validation rules, and quality gates — not as an open-ended chat.',
-  },
-  {
+    n: '01',
     Icon: Lock,
-    title: 'Confidentiality by Design',
-    desc: 'We match each engagement to the right trust model — private deployments, isolated workspaces, and access controls before tooling.',
+    title: 'Confidentiality-aware agentic workflows',
+    body: 'Applications and workflows can switch between online, cloud-secure, and offline modes based on the sensitivity of the material.',
+    why: 'Sensitive projects do not need to use the same AI path as low-risk content.',
   },
   {
-    Icon: ScrollText,
-    title: 'Auditable Workflows',
-    desc: 'Source trust rules, review gates, and decision logs are built into the workflow so quality and compliance are visible end-to-end.',
+    n: '02',
+    Icon: Library,
+    title: 'Bespoke skills and expert workflow library',
+    body: 'Reusable workflow patterns capture learning architecture, assessment design, knowledge structuring, content QA, simulation logic, and business output rules.',
+    why: 'Expert thinking becomes repeatable instead of remaining trapped in individual reviewers.',
   },
   {
+    n: '03',
     Icon: Network,
-    title: 'Source-Grounded Output',
-    desc: 'Validated source bases and citation discipline keep AI grounded — no untraceable generations entering critical content.',
+    title: 'RAG + Context Management',
+    body: 'Source-grounded RAG combined with curated context packs, wiki-style knowledge maps, reusable examples, and task-specific memory structures.',
+    why: 'The system retrieves what matters and carries forward the right context without flooding the model.',
   },
   {
-    Icon: EyeOff,
-    title: 'Human Oversight, Not Theater',
-    desc: 'Expert review is structural, not cosmetic. Experts set the rubrics and decide when AI output gets to ship.',
+    n: '04',
+    Icon: ListChecks,
+    title: 'Layered quality audits',
+    body: 'Outputs pass through sample checks, rubric checks, source checks, bias and fairness checks, format checks, and expert escalation where needed.',
+    why: 'Quality is stabilised across batches, not judged only at the end.',
   },
   {
-    Icon: GitBranch,
-    title: 'Reversible by Default',
-    desc: 'Versioned content, governance cadence, and rollback paths so systems can evolve without losing institutional memory.',
+    n: '05',
+    Icon: RefreshCcw,
+    title: 'Iterative production intelligence',
+    body: 'Each production cycle improves prompts, agents, templates, checklists, and source structures.',
+    why: 'The workflow gets stronger as volume increases.',
   },
 ];
 
 const TrustSection = () => {
+  const ref = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const glowY = useTransform(scrollYProgress, [0, 1], [-60, 60]);
+
   return (
-    <section id="trust" className="relative py-24 md:py-32 bg-brand-navy text-white overflow-hidden">
-      {/* Subtle texture */}
-      <div className="absolute inset-0 opacity-[0.08] pointer-events-none"
-           style={{
-             backgroundImage:
-               'radial-gradient(rgba(202,240,248,0.6) 1px, transparent 1px)',
-             backgroundSize: '32px 32px',
-           }}
+    <section
+      ref={ref}
+      id="trust"
+      className="relative py-16 md:py-24 bg-brand-navy text-white overflow-hidden"
+    >
+      {/* Top accent strip */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-pink" />
+
+      <motion.div
+        style={{ y: glowY }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <div className="absolute -top-32 left-1/4 w-[28rem] h-[28rem] bg-brand-teal/15 rounded-full blur-3xl" />
+        <div className="absolute -bottom-32 right-1/4 w-[28rem] h-[28rem] bg-brand-pink/15 rounded-full blur-3xl" />
+      </motion.div>
+
+      <div
+        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(rgba(202,240,248,0.6) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
+        }}
       />
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-brand-teal/10 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 lg:sticky lg:top-32"
-          >
-            <span className="text-brand-pink font-bold tracking-[0.25em] text-xs uppercase mb-4 block">
-              Trust & Governance
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold leading-[1.1] mb-6">
-              AI without compromise.
-            </h2>
-            <p className="text-lg text-brand-mist/80 leading-relaxed mb-6">
-              "Move fast and break things" is a luxury PlatypAI's clients do not have. Learning, clinical, compliance, and enterprise workflows ship into environments where the cost of bad output is real.
-            </p>
-            <p className="text-brand-mist/70 leading-relaxed">
-              Trust isn't a layer we add at the end. It is how the system is built — from the trust model and source rules through the review gates, all the way to the deployment posture.
-            </p>
+        <div className="mb-10 md:mb-14 max-w-3xl">
+          <span className="text-brand-pink font-bold tracking-[0.25em] text-xs uppercase mb-3 block">
+            Trust & Security
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold leading-[1.05] mb-5">
+            Trust is designed into the workflow.
+            <br />
+            Not patched onto the output.
+          </h2>
+          <p className="text-base md:text-lg text-brand-mist/80 leading-relaxed">
+            Our core team's careers have been built on the trust of the credibility and value they represent. We engineer the same credibility into our design, workflows, and processes — upfront, so that scale and speed stay stable and dependable.
+          </p>
+        </div>
 
-            {/* Cross-cutting principles pulled directly from siteContent for consistency */}
-            <div className="mt-10 space-y-3">
-              {siteContent.crossCutting.map((p) => (
-                <div
-                  key={p.id}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-white/5 border border-white/10"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-teal mt-2 flex-shrink-0" />
-                  <div>
-                    <div className="text-sm font-semibold text-white">{p.label}</div>
-                    <div className="text-xs text-brand-mist/70 mt-0.5 leading-relaxed">
-                      {p.description}
-                    </div>
-                  </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          {pillars.map((p, idx) => (
+            <motion.div
+              key={p.n}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.4, delay: (idx % 3) * 0.07 }}
+              className="bg-white/[0.04] border border-white/10 rounded-2xl p-5 md:p-6 hover:bg-white/[0.07] hover:border-brand-teal/40 transition-all relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-teal/40 to-transparent" />
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl bg-brand-teal/15 text-brand-teal flex items-center justify-center">
+                  <p.Icon size={18} />
                 </div>
-              ))}
-            </div>
-          </motion.div>
+                <span className="text-[10px] font-bold text-brand-pink tracking-[0.2em]">
+                  {p.n}
+                </span>
+              </div>
 
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
-            {trustPillars.map((pillar, idx) => (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.45, delay: (idx % 2) * 0.08 }}
-                className="bg-white/[0.04] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.07] hover:border-brand-teal/40 transition-all"
-              >
-                <div className="w-11 h-11 rounded-xl bg-brand-teal/15 text-brand-teal flex items-center justify-center mb-4">
-                  <pillar.Icon size={20} />
+              <h3 className="font-bold text-white text-base md:text-lg mb-2 leading-tight">
+                {p.title}
+              </h3>
+              <p className="text-sm text-brand-mist/75 leading-relaxed mb-4">{p.body}</p>
+
+              <div className="pt-3 border-t border-white/10">
+                <div className="text-[9px] font-bold text-brand-cyan tracking-[0.25em] uppercase mb-1">
+                  Why it matters
                 </div>
-                <h3 className="font-bold text-white text-lg mb-2 leading-tight">
-                  {pillar.title}
-                </h3>
-                <p className="text-sm text-brand-mist/75 leading-relaxed">{pillar.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+                <p className="text-xs text-brand-mist/80 leading-relaxed">{p.why}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

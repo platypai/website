@@ -69,22 +69,29 @@ const methodologies: Methodology[] = [
 
 const CorePhilosophy = () => {
   return (
-    <section id="methodology" className="pt-0 pb-24 md:pb-32 bg-white relative overflow-hidden">
+    <section id="methodology" className="pt-0 pb-16 md:pb-20 bg-white relative overflow-hidden">
       {/* Top dark banner with the four core principles */}
-      <div className="bg-brand-navy w-full py-14 md:py-20 px-6 relative z-10 shadow-xl">
+      <div className="bg-brand-navy w-full py-12 md:py-16 px-6 relative z-10 shadow-xl">
+        {/* colored accent strip */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-pink" />
+
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-x-16 gap-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-14 gap-y-7">
             {philosophyPoints.map((point, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
                 className="flex items-start"
               >
-                <div className="w-2 h-2 rounded-full bg-brand-teal mt-2.5 mr-4 flex-shrink-0" />
-                <p className="text-brand-mist/90 text-lg leading-relaxed">
+                <div
+                  className={`w-2 h-2 rounded-full mt-2.5 mr-4 flex-shrink-0 ${
+                    idx % 2 === 0 ? 'bg-brand-teal' : 'bg-brand-pink'
+                  }`}
+                />
+                <p className="text-brand-mist/90 text-base md:text-lg leading-relaxed">
                   <span className="font-bold text-white block mb-1">{point.title}</span>
                   {point.desc}
                 </p>
@@ -95,38 +102,38 @@ const CorePhilosophy = () => {
       </div>
 
       {/* Philosophy intro */}
-      <div className="max-w-7xl mx-auto px-6 mt-24 md:mt-32 mb-16">
+      <div className="max-w-7xl mx-auto px-6 mt-16 md:mt-20 mb-10">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.55 }}
         >
-          <span className="eyebrow mb-4 block">The Core Philosophy</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-navy leading-[1.1] mb-8 max-w-3xl">
+          <span className="eyebrow mb-3 block">The Core Philosophy</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-navy leading-[1.05] mb-6 max-w-3xl">
             AI output is becoming the norm.
             <br />
             Expert input is still scarce.
           </h2>
-          <div className="space-y-6 text-lg text-brand-navy/75 max-w-4xl leading-relaxed">
+          <div className="space-y-4 text-base md:text-lg text-brand-navy/75 max-w-4xl leading-relaxed">
             <p>
               The learning industry is quickly adopting AI to generate content. That adoption is coming at the cost of design quality, expert judgment, and the ability to preserve quality at scale.
             </p>
             <p>
-              PlatypAI works where that gap matters. We design AI workflows and products that capture expert perspective before production begins — and maintain it through production.
+              PlatypAI works where that gap matters — designing AI workflows and products that capture expert perspective <em className="not-italic text-brand-navy font-semibold">before</em> production begins, and maintain it <em className="not-italic text-brand-navy font-semibold">through</em> production.
             </p>
           </div>
         </motion.div>
       </div>
 
       {/* Methodology comparison */}
-      <div className="max-w-7xl mx-auto px-6 mt-16 md:mt-24">
-        <span className="eyebrow mb-6 block">From AI-Only to Expert-in-the-Loop</span>
+      <div className="max-w-7xl mx-auto px-6 mt-10 md:mt-14">
+        <span className="eyebrow mb-5 block">From AI-Only to Expert-in-the-Loop</span>
 
         {/* Desktop table */}
         <div className="hidden md:block w-full">
           <div className="grid grid-cols-4 bg-white border border-brand-navy/10 rounded-2xl overflow-hidden shadow-sm">
-            <div className="col-span-1 p-6 border-b border-brand-navy/10 bg-brand-mist/60">
+            <div className="col-span-1 p-5 border-b border-brand-navy/10 bg-brand-mist">
               <h3 className="font-bold text-brand-navy uppercase text-sm tracking-wider">
                 Methodology
               </h3>
@@ -134,16 +141,19 @@ const CorePhilosophy = () => {
             {methodologies.map((method, idx) => (
               <div
                 key={idx}
-                className={`col-span-1 p-6 border-b ${
+                className={`col-span-1 p-5 border-b relative ${
                   method.highlight
-                    ? 'bg-brand-navy text-white border-brand-navy'
+                    ? 'bg-gradient-to-br from-brand-navy via-brand-navy to-[#082037] text-white border-brand-navy'
                     : 'bg-white text-brand-navy border-brand-navy/10 border-l'
                 }`}
               >
+                {method.highlight && (
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-pink" />
+                )}
                 <h3 className="font-bold text-lg">{method.name}</h3>
                 {method.subtitle && (
-                  <span className="text-brand-teal text-[10px] tracking-[0.25em] uppercase mt-1.5 block font-bold">
-                    {method.subtitle}
+                  <span className="text-brand-teal text-[10px] tracking-[0.25em] uppercase mt-1 block font-bold">
+                    ★ {method.subtitle}
                   </span>
                 )}
               </div>
@@ -151,7 +161,7 @@ const CorePhilosophy = () => {
 
             {methodologies[0].features.map((feature, rowIdx) => (
               <Fragment key={rowIdx}>
-                <div className="col-span-1 p-6 border-b border-brand-navy/10 bg-brand-mist/60 flex items-center">
+                <div className="col-span-1 p-5 border-b border-brand-navy/10 bg-brand-mist flex items-center">
                   <span className="font-bold text-brand-navy/65 text-[11px] tracking-[0.2em] uppercase">
                     {feature.label}
                   </span>
@@ -159,13 +169,13 @@ const CorePhilosophy = () => {
                 {methodologies.map((method, colIdx) => (
                   <motion.div
                     key={`${rowIdx}-${colIdx}`}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: colIdx * 0.1 + rowIdx * 0.05 }}
-                    className={`col-span-1 p-6 border-b flex items-center ${
+                    transition={{ duration: 0.35, delay: colIdx * 0.06 + rowIdx * 0.04 }}
+                    className={`col-span-1 p-5 border-b flex items-center ${
                       method.highlight
-                        ? 'bg-brand-navy text-white border-brand-navy/80 border-t border-t-white/10'
+                        ? 'bg-gradient-to-br from-brand-navy via-brand-navy to-[#082037] text-white border-brand-navy/80 border-t border-t-white/10'
                         : 'bg-white text-brand-navy/80 border-brand-navy/10 border-l'
                     }`}
                   >
@@ -178,11 +188,11 @@ const CorePhilosophy = () => {
         </div>
 
         {/* Mobile stacked cards */}
-        <div className="md:hidden space-y-4">
+        <div className="md:hidden space-y-3">
           {methodologies.map((method, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.05 }}
@@ -192,17 +202,20 @@ const CorePhilosophy = () => {
                   : 'bg-white text-brand-navy border-brand-navy/10'
               }`}
             >
+              {method.highlight && (
+                <div className="h-1 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-pink" />
+              )}
               <div className="p-5 border-b border-current/10 flex items-baseline justify-between gap-3">
                 <h3 className="font-bold text-lg">{method.name}</h3>
                 {method.subtitle && (
                   <span className="text-brand-teal text-[10px] tracking-[0.25em] uppercase font-bold">
-                    {method.subtitle}
+                    ★ {method.subtitle}
                   </span>
                 )}
               </div>
               <div className="divide-y divide-current/10">
                 {method.features.map((f, i) => (
-                  <div key={i} className="px-5 py-4">
+                  <div key={i} className="px-5 py-3.5">
                     <div
                       className={`text-[10px] font-bold tracking-[0.2em] uppercase mb-1 ${
                         method.highlight ? 'text-brand-teal' : 'text-brand-navy/55'

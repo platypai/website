@@ -12,12 +12,13 @@ const footerSections = [
     ],
   },
   {
-    title: 'Programs',
+    title: 'Case Studies',
     links: [
-      { label: 'Curriculum & Credentialing', href: '#practice' },
-      { label: 'Validated Assessment', href: '#practice' },
-      { label: 'Decision Rehearsal', href: '#practice' },
-      { label: 'Knowledge Operations', href: '#practice' },
+      { label: 'Enterprise Knowledge', href: '#practice' },
+      { label: 'Sales Enablement AI', href: '#practice' },
+      { label: 'Leadership Simulation', href: '#practice' },
+      { label: 'Content Production Engine', href: '#practice' },
+      { label: 'Knowledge Tooling', href: '#practice' },
     ],
   },
   {

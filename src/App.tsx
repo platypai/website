@@ -4,7 +4,9 @@ import CorePhilosophy from './components/Sections/CorePhilosophy';
 import ArchitectureStack from './components/Sections/ArchitectureStack';
 import ServiceSystems from './components/Sections/ServiceSystems';
 import CaseStudies from './components/Sections/CaseStudies';
+import WorkflowLoops from './components/Sections/WorkflowLoops';
 import TrustSection from './components/Sections/TrustSection';
+import EngagementModel from './components/Sections/EngagementModel';
 import ClosingCTA from './components/Sections/ClosingCTA';
 import Footer from './components/Layout/Footer';
 
@@ -19,7 +21,9 @@ function App() {
         <ArchitectureStack />
         <ServiceSystems />
         <CaseStudies />
+        <WorkflowLoops />
         <TrustSection />
+        <EngagementModel />
         <ClosingCTA />
       </main>
 
