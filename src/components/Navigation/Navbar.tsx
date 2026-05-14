@@ -49,7 +49,10 @@ const Navbar = () => {
           ))}
         </div>
 
-        <button className="hidden md:block px-6 py-2 border-2 border-brand-navy text-brand-navy font-semibold rounded hover:bg-brand-navy hover:text-white transition-all">
+        <button 
+          onClick={() => window.location.href = 'mailto:hello@platypai.com'}
+          className="hidden md:block px-6 py-2 border-2 border-brand-navy text-brand-navy font-semibold rounded hover:bg-brand-navy hover:text-white transition-all"
+        >
           Start Building
         </button>
 
