@@ -8,7 +8,7 @@ interface InfographicCardProps {
   data: any;
 }
 
-const InfographicCard: React.FC<InfographicCardProps> = ({ type, title, data }) => {
+const InfographicCard: React.FC<InfographicCardProps> = ({ type, title }) => {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}

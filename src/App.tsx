@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CoreMap from './components/Map/CoreMap';
 import Wayfinding from './components/Navigation/Wayfinding';
 import DeepDivePanel from './components/Panels/DeepDivePanel';
-import { ActionableNode, siteContent } from './data/siteContent';
+import { siteContent } from './data/siteContent';
+import type { ActionableNode } from './data/siteContent';
 
 function App() {
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);

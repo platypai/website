@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { siteContent, PrimaryCategory, ActionableNode } from '../../data/siteContent';
+import { siteContent } from '../../data/siteContent';
+import type { ActionableNode } from '../../data/siteContent';
 
 interface CoreMapProps {
   activeCategory: string | null;

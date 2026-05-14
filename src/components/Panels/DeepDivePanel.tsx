@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { ActionableNode } from '../../data/siteContent';
+import type { ActionableNode } from '../../data/siteContent';
 import InfographicCard from '../Modules/InfographicCard';
 
 interface DeepDivePanelProps {
