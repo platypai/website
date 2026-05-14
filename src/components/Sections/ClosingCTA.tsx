@@ -53,9 +53,9 @@ const ClosingCTA = () => {
           transition={{ duration: 0.55 }}
         >
           <span className="eyebrow mb-4 block">Let's Build Together</span>
-          <h2 className="text-4xl md:text-6xl font-bold text-brand-navy leading-[1.02] tracking-tight mb-5">
+          <h2 className="text-[2.5rem] sm:text-4xl md:text-6xl font-bold text-brand-navy leading-[1.04] tracking-tight mb-5">
             Ready to scale your{' '}
-            <span className="brand-gradient-text">learning transformation?</span>
+            <span className="text-brand-teal">learning transformation?</span>
           </h2>
           <p className="text-base md:text-xl text-brand-navy/70 max-w-2xl mx-auto leading-relaxed mb-8">
             AI is a great vehicle to speed and scale things up — when you have an expert driving. Reach out to one of our founders to map your business need to a working system.
@@ -64,18 +64,18 @@ const ClosingCTA = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
             <a
               href="mailto:arpan@platypai.one?subject=PlatypAI%20%E2%80%94%20Discovery%20session"
-              className="inline-flex items-center px-7 py-3.5 bg-brand-navy text-white font-semibold rounded-lg hover:bg-brand-teal transition-all hover:shadow-[0_10px_30px_-10px_rgba(0,180,216,0.5)] group"
+              className="inline-flex items-center px-7 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-all hover:shadow-[0_10px_30px_-10px_rgba(0,180,216,0.5)] group shadow-md shadow-brand-teal/25"
             >
               <Mail size={16} className="mr-2" />
               Book a Discovery Session
               <ArrowRight
                 size={16}
-                className="ml-2 opacity-70 group-hover:translate-x-1 group-hover:opacity-100 transition-all"
+                className="ml-2 opacity-90 group-hover:translate-x-1 transition-all"
               />
             </a>
             <a
               href="#systems"
-              className="inline-flex items-center px-7 py-3.5 border border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:bg-brand-mist hover:border-brand-navy/25 transition-all"
+              className="inline-flex items-center px-7 py-3.5 border-2 border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:border-brand-teal hover:text-brand-teal transition-colors"
             >
               Explore Systems First
             </a>

@@ -83,7 +83,7 @@ const Navbar = () => {
 
           <a
             href={`mailto:${CONTACT_EMAIL}?subject=PlatypAI%20%E2%80%94%20Discovery%20enquiry`}
-            className="hidden md:inline-flex items-center px-5 py-2.5 bg-brand-navy text-white text-sm font-semibold rounded-lg hover:bg-brand-teal transition-colors"
+            className="hidden md:inline-flex items-center px-5 py-2.5 bg-brand-teal text-white text-sm font-semibold rounded-lg hover:bg-[#0096B8] transition-colors shadow-sm"
           >
             <Mail size={14} className="mr-2" />
             Start Building
@@ -161,7 +161,7 @@ const Navbar = () => {
               <div className="px-6 py-6 border-t border-brand-navy/10 space-y-3">
                 <a
                   href={`mailto:${CONTACT_EMAIL}?subject=PlatypAI%20%E2%80%94%20Discovery%20enquiry`}
-                  className="flex items-center justify-center px-5 py-3 bg-brand-navy text-white font-semibold rounded-lg hover:bg-brand-teal transition-colors"
+                  className="flex items-center justify-center px-5 py-3 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-colors shadow-sm"
                   onClick={() => setOpen(false)}
                 >
                   <Mail size={16} className="mr-2" />

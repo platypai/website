@@ -9,18 +9,25 @@ const HeroSection = () => {
   const glowY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, -40]);
   const visualY = useTransform(scrollYProgress, [0, 1], [0, -20]);
+  const visualScale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+  const visualOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.5]);
 
   return (
     <section
       ref={ref}
       id="model"
-      className="relative pt-28 pb-16 md:pt-36 md:pb-20 bg-white overflow-hidden"
+      className="relative pt-24 pb-12 md:pt-36 md:pb-20 bg-white overflow-hidden"
     >
-      {/* Layered colored glows (parallax) */}
+      {/* Layered colored glows — anchored behind the right-hand metaphor for visual balance */}
       <motion.div style={{ y: glowY }} className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[120vw] h-[55vh] bg-gradient-to-b from-brand-cyan/30 via-brand-mist/40 to-transparent rounded-full blur-3xl" />
-        <div className="absolute top-20 right-[-10%] w-[40vw] h-[40vh] bg-brand-pink/15 rounded-full blur-3xl" />
-        <div className="absolute top-32 left-[-10%] w-[40vw] h-[40vh] bg-brand-teal/15 rounded-full blur-3xl" />
+        {/* Soft top wash */}
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[120vw] h-[55vh] bg-gradient-to-b from-brand-cyan/25 via-brand-mist/30 to-transparent rounded-full blur-3xl" />
+        {/* Teal glow centered on the metaphor (right two-thirds, vertically centered) */}
+        <div className="absolute top-1/2 right-[12%] -translate-y-1/2 w-[34vw] h-[34vw] max-w-[420px] max-h-[420px] bg-brand-teal/20 rounded-full blur-3xl" />
+        {/* Pink companion glow, just below-right of the metaphor for subtle asymmetric depth */}
+        <div className="absolute top-[60%] right-[6%] -translate-y-1/2 w-[22vw] h-[22vw] max-w-[280px] max-h-[280px] bg-brand-pink/15 rounded-full blur-3xl" />
+        {/* Light teal hint on the left, paired with the content column */}
+        <div className="absolute top-[30%] left-[-6%] w-[24vw] h-[24vw] max-w-[320px] max-h-[320px] bg-brand-cyan/15 rounded-full blur-3xl" />
         <div className="absolute inset-0 bg-dotted opacity-40" />
       </motion.div>
 
@@ -42,11 +49,11 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-5xl md:text-[5rem] font-bold text-brand-navy leading-[1.02] tracking-tight mb-5"
+              className="text-[2.75rem] sm:text-5xl md:text-[5rem] font-bold text-brand-navy leading-[1.04] tracking-tight mb-5"
             >
               Human expertise.
               <br />
-              <span className="brand-gradient-text">AI amplified.</span>
+              <span className="text-brand-teal">AI amplified.</span>
             </motion.h1>
 
             <motion.p
@@ -66,17 +73,17 @@ const HeroSection = () => {
             >
               <a
                 href="#systems"
-                className="px-6 py-3.5 bg-brand-navy text-white font-semibold rounded-lg hover:bg-brand-teal transition-colors flex items-center justify-center group shadow-lg shadow-brand-navy/15"
+                className="px-6 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-colors flex items-center justify-center group shadow-md shadow-brand-teal/25"
               >
                 Explore the Systems
                 <ArrowRight
-                  className="ml-2 opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+                  className="ml-2 opacity-90 group-hover:translate-x-1 transition-all"
                   size={18}
                 />
               </a>
               <a
                 href="mailto:arpan@platypai.one?subject=PlatypAI%20%E2%80%94%20Discovery%20enquiry"
-                className="px-6 py-3.5 border border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:bg-brand-mist hover:border-brand-navy/25 transition-all flex items-center justify-center"
+                className="px-6 py-3.5 border-2 border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:border-brand-teal hover:text-brand-teal transition-colors flex items-center justify-center"
               >
                 Book a Discovery Session
               </a>
@@ -101,13 +108,13 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right visual with parallax */}
+          {/* Right visual with parallax + scroll-linked scale/fade */}
           <motion.div
-            style={{ y: visualY }}
+            style={{ y: visualY, scale: visualScale, opacity: visualOpacity }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="md:col-span-5 flex justify-center relative h-[380px] md:h-[460px]"
+            className="md:col-span-5 flex justify-center relative h-[340px] sm:h-[380px] md:h-[460px]"
           >
             <HeroMetaphor />
           </motion.div>

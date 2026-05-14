@@ -32,7 +32,7 @@ const WorkflowLoops = () => {
         <div className="mb-10 md:mb-14 max-w-3xl">
           <span className="eyebrow mb-3 block">Workflow Methodology</span>
           <h2 className="text-4xl md:text-5xl font-bold text-brand-navy leading-[1.05] mb-4">
-            Two loops. <span className="brand-gradient-text">Expert-designed first.</span>
+            Two loops. <span className="text-brand-teal">Expert-designed first.</span>
             <br />
             Then automation with expert audits.
           </h2>
@@ -115,20 +115,33 @@ const LoopCard = ({ label, title, subtitle, tone, steps }: LoopCardProps) => {
         <h3 className="text-2xl font-bold text-brand-navy mb-5 leading-tight">{title}</h3>
 
         <ol className="space-y-3 relative">
-          {/* Vertical connector */}
-          <div className={`absolute left-[15px] top-3 bottom-3 w-px ${accentSoft}`} />
+          {/* Animated vertical connector — draws in as the card enters viewport */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, margin: '-30px' }}
+            transition={{ duration: 0.6 + steps.length * 0.05, ease: 'easeOut' }}
+            style={{ transformOrigin: 'top' }}
+            className={`absolute left-[15px] top-3 bottom-3 w-px ${accentSoft}`}
+          />
           {steps.map((step, idx) => (
             <motion.li
               key={step.n}
-              initial={{ opacity: 0, x: -8 }}
+              initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: idx * 0.07 }}
+              viewport={{ once: true, margin: '-30px' }}
+              transition={{ duration: 0.35, delay: idx * 0.1 }}
               className="flex items-start gap-3 relative"
             >
-              <div className={`w-8 h-8 rounded-full ${accentBg} text-white flex items-center justify-center flex-shrink-0 shadow-sm relative z-10`}>
+              <motion.div
+                initial={{ scale: 0.6, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.3, delay: 0.1 + idx * 0.1, ease: 'backOut' }}
+                className={`w-8 h-8 rounded-full ${accentBg} text-white flex items-center justify-center flex-shrink-0 shadow-sm relative z-10`}
+              >
                 {step.icon}
-              </div>
+              </motion.div>
               <div className="flex-1 pt-1">
                 <div className="flex items-center gap-2">
                   <span className={`text-[10px] font-bold ${accentText} tracking-wider`}>

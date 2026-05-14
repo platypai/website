@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, X, Sparkles, ShieldCheck, TrendingUp } from 'lucide-react';
 import { caseStudyPrograms } from '../../data/caseStudies';
 import type { CaseStudyProgram } from '../../data/caseStudies';
+import Counter from '../Brand/Counter';
 
 const accentMap = {
   teal: {
@@ -11,28 +12,16 @@ const accentMap = {
     text: 'text-brand-teal',
     soft: 'bg-brand-teal/10',
     border: 'border-brand-teal/30',
-    gradient: 'from-brand-teal to-brand-cyan',
+    strip: 'bg-brand-teal',
+    hoverRing: 'hover:ring-brand-teal/30',
   },
   pink: {
     bg: 'bg-brand-pink',
     text: 'text-brand-pink',
     soft: 'bg-brand-pink/10',
     border: 'border-brand-pink/30',
-    gradient: 'from-brand-pink to-[#FF8FA3]',
-  },
-  cyan: {
-    bg: 'bg-brand-cyan',
-    text: 'text-[#0077B6]',
-    soft: 'bg-brand-cyan/20',
-    border: 'border-brand-cyan/40',
-    gradient: 'from-brand-cyan to-brand-teal',
-  },
-  navy: {
-    bg: 'bg-brand-navy',
-    text: 'text-brand-navy',
-    soft: 'bg-brand-navy/5',
-    border: 'border-brand-navy/20',
-    gradient: 'from-brand-navy to-[#0d2444]',
+    strip: 'bg-brand-pink',
+    hoverRing: 'hover:ring-brand-pink/30',
   },
 } as const;
 
@@ -85,43 +74,44 @@ const CaseStudies = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.45, delay: (idx % 3) * 0.08 }}
-                className="group relative text-left bg-white border border-brand-navy/10 hover:border-transparent hover:ring-2 hover:ring-brand-teal/25 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 flex flex-col overflow-hidden"
+                className={`group relative text-left bg-white border border-brand-navy/10 hover:ring-2 ${a.hoverRing} hover:border-transparent rounded-2xl p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 flex flex-col overflow-hidden`}
               >
-                {/* Colored top ribbon */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${a.gradient}`} />
+                {/* Colored top strip — accent only here */}
+                <div className={`absolute top-0 left-0 right-0 h-1 ${a.strip}`} />
 
-                {/* Big metric */}
-                <div className="flex items-baseline gap-3 mb-3">
-                  <div className={`text-5xl md:text-6xl font-bold ${a.text} leading-none`}>
-                    {program.metric}
-                  </div>
-                  <TrendingUp size={20} className={`${a.text} opacity-70`} />
+                {/* Big metric — the single color moment per card */}
+                <div className="flex items-baseline gap-3 mb-2">
+                  <Counter
+                    value={program.metric}
+                    className={`text-5xl md:text-6xl font-bold ${a.text} leading-none tabular-nums`}
+                  />
+                  <TrendingUp size={18} className={`${a.text} opacity-70`} />
                 </div>
-                <p className="text-xs font-semibold text-brand-navy/60 uppercase tracking-wider mb-5 leading-snug">
+                <p className="text-[11px] font-semibold text-brand-navy/55 uppercase tracking-wider mb-5 leading-snug">
                   {program.metricLabel}
                 </p>
 
-                {/* Category chip */}
+                {/* Category chip — neutral */}
                 <div className="mb-3">
-                  <span className={`inline-block px-2.5 py-1 rounded-full ${a.soft} ${a.text} text-[10px] font-bold tracking-wider uppercase`}>
+                  <span className="inline-block px-2.5 py-1 rounded-full bg-brand-mist text-brand-navy/65 text-[10px] font-bold tracking-wider uppercase border border-brand-navy/10">
                     {program.categoryLabel}
                   </span>
                 </div>
 
-                {/* Title + tagline */}
-                <h3 className="text-lg md:text-xl font-bold text-brand-navy mb-2 leading-tight group-hover:text-brand-teal transition-colors">
+                {/* Title + tagline — navy, calm hover */}
+                <h3 className="text-lg md:text-xl font-bold text-brand-navy mb-2 leading-tight">
                   {program.title}
                 </h3>
                 <p className="text-sm text-brand-navy/70 leading-relaxed mb-5 flex-1">
                   {program.tagline}
                 </p>
 
-                {/* Domain */}
+                {/* Domain + neutral read-case affordance */}
                 <div className="pt-4 border-t border-dashed border-brand-navy/10 flex items-center justify-between">
                   <span className="text-xs font-semibold text-brand-navy/60">
                     {program.domain}
                   </span>
-                  <span className={`${a.text} text-xs font-bold inline-flex items-center group-hover:translate-x-0.5 transition-transform`}>
+                  <span className="text-brand-navy text-xs font-bold inline-flex items-center group-hover:text-brand-teal transition-colors">
                     Read case
                     <ArrowUpRight
                       size={14}
@@ -159,7 +149,7 @@ const CaseStudies = () => {
               className="relative bg-white w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-t-3xl md:rounded-2xl shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className={`h-1 bg-gradient-to-r ${accentMap[activeProgram.accent].gradient}`} />
+              <div className={`h-1 ${accentMap[activeProgram.accent].strip}`} />
 
               <div className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-brand-navy/10 px-6 md:px-10 py-5 flex items-start justify-between gap-4">
                 <div>
@@ -189,9 +179,10 @@ const CaseStudies = () => {
               <div className="px-6 md:px-10 py-7 space-y-7">
                 {/* Hero metric */}
                 <div className={`rounded-2xl p-6 ${accentMap[activeProgram.accent].soft} border ${accentMap[activeProgram.accent].border} flex items-center gap-5`}>
-                  <div className={`text-5xl md:text-6xl font-bold ${accentMap[activeProgram.accent].text} leading-none`}>
-                    {activeProgram.metric}
-                  </div>
+                  <Counter
+                    value={activeProgram.metric}
+                    className={`text-5xl md:text-6xl font-bold ${accentMap[activeProgram.accent].text} leading-none tabular-nums`}
+                  />
                   <div>
                     <div className="text-xs font-bold text-brand-navy/55 uppercase tracking-wider mb-1">
                       The Outcome
@@ -260,7 +251,7 @@ const CaseStudies = () => {
                 <div className="pt-1 flex flex-col sm:flex-row gap-3">
                   <a
                     href="mailto:arpan@platypai.one?subject=PlatypAI%20%E2%80%94%20Program%20enquiry"
-                    className="flex-1 px-6 py-3.5 bg-brand-navy text-white font-semibold rounded-lg hover:bg-brand-teal transition-colors text-center"
+                    className="flex-1 px-6 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-colors text-center shadow-sm"
                   >
                     Start a similar program
                   </a>

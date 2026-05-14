@@ -1,17 +1,66 @@
-import { Fragment } from 'react';
 import { motion } from 'framer-motion';
+import {
+  Workflow,
+  Brain,
+  Compass,
+  ShieldCheck,
+  Target,
+  Sparkles,
+  Star,
+} from 'lucide-react';
+import SwipeHint from '../Brand/SwipeHint';
 
-interface MethodologyFeature {
+interface Dimension {
+  key: string;
   label: string;
-  desc: string;
+  Icon: typeof Workflow;
+  aiOnly: string;
+  hitl: string;
+  eitl: string;
 }
 
-interface Methodology {
-  name: string;
-  subtitle?: string;
-  features: MethodologyFeature[];
-  highlight?: boolean;
-}
+const dimensions: Dimension[] = [
+  {
+    key: 'workflow',
+    label: 'Workflow Design',
+    Icon: Workflow,
+    aiOnly: 'Generates from prompts.',
+    hitl: 'Reviews output after generation.',
+    eitl: 'Architects the workflow before generation begins.',
+  },
+  {
+    key: 'domain',
+    label: 'Domain Logic',
+    Icon: Brain,
+    aiOnly: 'Optimises for speed.',
+    hitl: 'Catches visible errors.',
+    eitl: 'Embeds domain logic and quality rules natively.',
+  },
+  {
+    key: 'context',
+    label: 'Context',
+    Icon: Compass,
+    aiOnly: 'Depends on the prompt.',
+    hitl: 'Depends on reviewer interpretation.',
+    eitl: 'Structures context via taxonomies and rubrics.',
+  },
+  {
+    key: 'quality',
+    label: 'Quality Control',
+    Icon: ShieldCheck,
+    aiOnly: 'Varies by user.',
+    hitl: 'Improves selected drafts.',
+    eitl: 'Ensures consistent quality through expert audits.',
+  },
+  {
+    key: 'outcome',
+    label: 'Outcome',
+    Icon: Target,
+    aiOnly: 'Good for low-risk tasks.',
+    hitl: 'Useful for controlled content production.',
+    eitl: 'Creates repeatable, business-critical engines.',
+  },
+];
 
 const philosophyPoints = [
   {
@@ -32,49 +81,12 @@ const philosophyPoints = [
   },
 ];
 
-const methodologies: Methodology[] = [
-  {
-    name: 'AI-only',
-    features: [
-      { label: 'Workflow Design', desc: 'Generates from prompts.' },
-      { label: 'Domain Logic', desc: 'Optimises for speed.' },
-      { label: 'Context', desc: 'Context depends on the prompt.' },
-      { label: 'Quality Control', desc: 'Quality varies by user.' },
-      { label: 'Outcome', desc: 'Good for low-risk tasks.' },
-    ],
-  },
-  {
-    name: 'Human-in-the-Loop',
-    features: [
-      { label: 'Workflow Design', desc: 'Reviews output after generation.' },
-      { label: 'Domain Logic', desc: 'Catches visible errors.' },
-      { label: 'Context', desc: 'Context depends on reviewer interpretation.' },
-      { label: 'Quality Control', desc: 'Improves selected drafts.' },
-      { label: 'Outcome', desc: 'Useful for controlled content production.' },
-    ],
-  },
-  {
-    name: 'Expert-in-the-Loop',
-    subtitle: 'Our Approach',
-    features: [
-      { label: 'Workflow Design', desc: 'Architects the workflow before generation begins.' },
-      { label: 'Domain Logic', desc: 'Embeds domain logic and quality rules natively.' },
-      { label: 'Context', desc: 'Structures context via taxonomies and rubrics.' },
-      { label: 'Quality Control', desc: 'Ensures consistent quality through expert audits.' },
-      { label: 'Outcome', desc: 'Creates repeatable, business-critical engines.' },
-    ],
-    highlight: true,
-  },
-];
-
 const CorePhilosophy = () => {
   return (
     <section id="methodology" className="pt-0 pb-16 md:pb-20 bg-white relative overflow-hidden">
       {/* Top dark banner with the four core principles */}
       <div className="bg-brand-navy w-full py-12 md:py-16 px-6 relative z-10 shadow-xl">
-        {/* colored accent strip */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-pink" />
-
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-x-14 gap-y-7">
             {philosophyPoints.map((point, idx) => (
@@ -102,7 +114,7 @@ const CorePhilosophy = () => {
       </div>
 
       {/* Philosophy intro */}
-      <div className="max-w-7xl mx-auto px-6 mt-16 md:mt-20 mb-10">
+      <div className="max-w-7xl mx-auto px-6 mt-14 md:mt-20 mb-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -126,118 +138,190 @@ const CorePhilosophy = () => {
         </motion.div>
       </div>
 
-      {/* Methodology comparison */}
-      <div className="max-w-7xl mx-auto px-6 mt-10 md:mt-14">
-        <span className="eyebrow mb-5 block">From AI-Only to Expert-in-the-Loop</span>
-
-        {/* Desktop table */}
-        <div className="hidden md:block w-full">
-          <div className="grid grid-cols-4 bg-white border border-brand-navy/10 rounded-2xl overflow-hidden shadow-sm">
-            <div className="col-span-1 p-5 border-b border-brand-navy/10 bg-brand-mist">
-              <h3 className="font-bold text-brand-navy uppercase text-sm tracking-wider">
-                Methodology
-              </h3>
-            </div>
-            {methodologies.map((method, idx) => (
-              <div
-                key={idx}
-                className={`col-span-1 p-5 border-b relative ${
-                  method.highlight
-                    ? 'bg-gradient-to-br from-brand-navy via-brand-navy to-[#082037] text-white border-brand-navy'
-                    : 'bg-white text-brand-navy border-brand-navy/10 border-l'
-                }`}
-              >
-                {method.highlight && (
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-pink" />
-                )}
-                <h3 className="font-bold text-lg">{method.name}</h3>
-                {method.subtitle && (
-                  <span className="text-brand-teal text-[10px] tracking-[0.25em] uppercase mt-1 block font-bold">
-                    ★ {method.subtitle}
-                  </span>
-                )}
-              </div>
-            ))}
-
-            {methodologies[0].features.map((feature, rowIdx) => (
-              <Fragment key={rowIdx}>
-                <div className="col-span-1 p-5 border-b border-brand-navy/10 bg-brand-mist flex items-center">
-                  <span className="font-bold text-brand-navy/65 text-[11px] tracking-[0.2em] uppercase">
-                    {feature.label}
-                  </span>
-                </div>
-                {methodologies.map((method, colIdx) => (
-                  <motion.div
-                    key={`${rowIdx}-${colIdx}`}
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.35, delay: colIdx * 0.06 + rowIdx * 0.04 }}
-                    className={`col-span-1 p-5 border-b flex items-center ${
-                      method.highlight
-                        ? 'bg-gradient-to-br from-brand-navy via-brand-navy to-[#082037] text-white border-brand-navy/80 border-t border-t-white/10'
-                        : 'bg-white text-brand-navy/80 border-brand-navy/10 border-l'
-                    }`}
-                  >
-                    <p className="text-sm leading-relaxed">{method.features[rowIdx].desc}</p>
-                  </motion.div>
-                ))}
-              </Fragment>
-            ))}
-          </div>
+      {/* Methodology progression — tier cards */}
+      <div className="max-w-7xl mx-auto px-6 mt-8 md:mt-12">
+        <div className="flex items-center justify-between flex-wrap gap-3 mb-5">
+          <span className="eyebrow">From AI-Only to Expert-in-the-Loop</span>
+          <SwipeHint />
+          <span className="hidden md:inline-flex items-center gap-2 text-[10px] font-bold text-brand-navy/45 tracking-[0.25em] uppercase">
+            Maturity progression
+            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M1 5 H 13 M9 1 L 13 5 L 9 9" />
+            </svg>
+          </span>
         </div>
 
-        {/* Mobile stacked cards */}
-        <div className="md:hidden space-y-3">
-          {methodologies.map((method, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className={`rounded-2xl overflow-hidden border shadow-sm ${
-                method.highlight
-                  ? 'bg-brand-navy text-white border-brand-navy'
-                  : 'bg-white text-brand-navy border-brand-navy/10'
-              }`}
-            >
-              {method.highlight && (
-                <div className="h-1 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-pink" />
-              )}
-              <div className="p-5 border-b border-current/10 flex items-baseline justify-between gap-3">
-                <h3 className="font-bold text-lg">{method.name}</h3>
-                {method.subtitle && (
-                  <span className="text-brand-teal text-[10px] tracking-[0.25em] uppercase font-bold">
-                    ★ {method.subtitle}
-                  </span>
-                )}
-              </div>
-              <div className="divide-y divide-current/10">
-                {method.features.map((f, i) => (
-                  <div key={i} className="px-5 py-3.5">
-                    <div
-                      className={`text-[10px] font-bold tracking-[0.2em] uppercase mb-1 ${
-                        method.highlight ? 'text-brand-teal' : 'text-brand-navy/55'
-                      }`}
-                    >
-                      {f.label}
-                    </div>
-                    <div
-                      className={`text-sm leading-relaxed ${
-                        method.highlight ? 'text-brand-mist/90' : 'text-brand-navy/80'
-                      }`}
-                    >
-                      {f.desc}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+        {/* Mobile: horizontal scroll-snap | Desktop: 3-col grid */}
+        <div className="-mx-6 lg:mx-0 px-6 lg:px-0 overflow-x-auto lg:overflow-visible no-scrollbar snap-x snap-mandatory lg:snap-none">
+          <div className="flex lg:grid lg:grid-cols-3 gap-4 lg:gap-5 items-stretch pb-2 lg:pb-0">
+            <TierCard
+              tier={1}
+              name="AI-only"
+              tagline="Prompt-driven generation."
+              tone="muted"
+              dimensions={dimensions}
+              valueKey="aiOnly"
+            />
+            <TierCard
+              tier={2}
+              name="Human-in-the-Loop"
+              tagline="Review after generation."
+              tone="balanced"
+              dimensions={dimensions}
+              valueKey="hitl"
+            />
+            <TierCard
+              tier={3}
+              name="Expert-in-the-Loop"
+              tagline="Designed before generation."
+              tone="featured"
+              dimensions={dimensions}
+              valueKey="eitl"
+              featured
+            />
+          </div>
         </div>
       </div>
     </section>
+  );
+};
+
+type TierTone = 'muted' | 'balanced' | 'featured';
+
+interface TierCardProps {
+  tier: number;
+  name: string;
+  tagline: string;
+  tone: TierTone;
+  dimensions: Dimension[];
+  valueKey: 'aiOnly' | 'hitl' | 'eitl';
+  featured?: boolean;
+}
+
+const TierCard = ({ tier, name, tagline, tone, dimensions, valueKey, featured }: TierCardProps) => {
+  const cardStyles = {
+    muted:
+      'bg-white border-brand-navy/10 text-brand-navy',
+    balanced:
+      'bg-white border-brand-navy/15 text-brand-navy',
+    featured:
+      'bg-gradient-to-b from-brand-navy to-[#082037] border-brand-teal/30 text-white shadow-2xl lg:scale-[1.02]',
+  } as const;
+
+  const dimensionWrapper = {
+    muted: 'border-brand-navy/10 text-brand-navy/60',
+    balanced: 'border-brand-navy/10 text-brand-navy/75',
+    featured: 'border-white/10 text-brand-mist/90',
+  } as const;
+
+  const iconStyles = {
+    muted: 'bg-brand-navy/5 text-brand-navy/40',
+    balanced: 'bg-brand-teal/10 text-brand-teal/80',
+    featured: 'bg-brand-teal text-white',
+  } as const;
+
+  // Progress dots: 1 of 3 → 2 of 3 → 3 of 3
+  const filledDots = tier;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.45, delay: (tier - 1) * 0.08 }}
+      className={`relative rounded-2xl border overflow-hidden flex flex-col flex-shrink-0 w-[82vw] max-w-[340px] lg:w-auto lg:max-w-none snap-center ${cardStyles[tone]}`}
+    >
+      {featured && (
+        <>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-teal via-brand-cyan to-brand-pink" />
+          <div className="absolute -top-px right-5 px-2.5 py-1 rounded-b-md bg-brand-teal text-white text-[9px] font-bold tracking-[0.25em] uppercase inline-flex items-center gap-1 shadow-md">
+            <Star size={10} className="fill-white" />
+            Our Approach
+          </div>
+        </>
+      )}
+
+      <div className="p-5 md:p-6 border-b border-current/10">
+        <div className="flex items-center gap-1.5 mb-3" aria-label={`Tier ${tier} of 3`}>
+          {[1, 2, 3].map((d) => (
+            <span
+              key={d}
+              className={`h-1.5 rounded-full ${
+                d <= filledDots
+                  ? featured
+                    ? 'bg-brand-teal w-6'
+                    : 'bg-brand-navy/60 w-5'
+                  : featured
+                  ? 'bg-white/15 w-3'
+                  : 'bg-brand-navy/15 w-3'
+              }`}
+            />
+          ))}
+        </div>
+
+        <div className="flex items-baseline justify-between gap-2">
+          <h3
+            className={`text-xl md:text-2xl font-bold leading-tight ${
+              featured ? 'text-white' : 'text-brand-navy'
+            }`}
+          >
+            {name}
+          </h3>
+          {featured && <Sparkles size={16} className="text-brand-teal flex-shrink-0" />}
+        </div>
+        <p
+          className={`text-sm mt-1 leading-snug ${
+            featured ? 'text-brand-mist/85' : 'text-brand-navy/60'
+          }`}
+        >
+          {tagline}
+        </p>
+      </div>
+
+      <ul className="flex flex-col">
+        {dimensions.map((d, idx) => (
+          <li
+            key={d.key}
+            className={`px-5 md:px-6 py-3.5 ${
+              idx > 0 ? `border-t ${dimensionWrapper[tone]}` : ''
+            }`}
+          >
+            <DimensionRow tone={tone} icon={d.Icon} iconStyle={iconStyles[tone]} label={d.label} value={d[valueKey]} />
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+};
+
+const DimensionRow = ({
+  tone,
+  icon: Icon,
+  iconStyle,
+  label,
+  value,
+}: {
+  tone: TierTone;
+  icon: typeof Workflow;
+  iconStyle: string;
+  label: string;
+  value: string;
+}) => {
+  const labelColor = tone === 'featured' ? 'text-brand-cyan' : 'text-brand-navy/55';
+  const valueColor = tone === 'featured' ? 'text-white' : 'text-brand-navy/85';
+
+  return (
+    <div className="flex items-start gap-3">
+      <div className={`w-8 h-8 rounded-lg ${iconStyle} flex items-center justify-center flex-shrink-0`}>
+        <Icon size={14} />
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className={`text-[10px] font-bold tracking-[0.2em] uppercase ${labelColor}`}>
+          {label}
+        </div>
+        <div className={`text-sm leading-snug mt-0.5 ${valueColor}`}>{value}</div>
+      </div>
+    </div>
   );
 };
 

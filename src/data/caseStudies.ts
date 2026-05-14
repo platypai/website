@@ -12,7 +12,7 @@ export interface CaseStudyProgram {
   tags: string[];
   metric: string;            // headline number, e.g., "80%"
   metricLabel: string;       // what the number describes
-  accent: 'teal' | 'pink' | 'cyan' | 'navy';
+  accent: 'teal' | 'pink';
   brief: string;
   challenge: string;
   approach: string[];
@@ -91,7 +91,7 @@ export const caseStudyPrograms: CaseStudyProgram[] = [
     tags: ["Simulation", "Leadership", "Adaptive"],
     metric: "5K+",
     metricLabel: "Global learners standardised",
-    accent: "cyan",
+    accent: "teal",
     brief: "Scaled scenario-based leadership development to over 5,000 learners worldwide via a multi-stage simulation engine with expert-calibrated scoring and feedback.",
     challenge: "School leadership development relied on workshops and case discussions that couldn't standardize quality across districts and geographies. The client needed scenario-based PD that scaled judgment practice without diluting the standard of practice.",
     approach: [
