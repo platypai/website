@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-darkBg text-brand-mist font-sans m-0 overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .map-container {
+    @apply relative w-full h-screen overflow-hidden flex items-center justify-center;
+  }
+  
+  .node-core {
+    @apply absolute w-64 h-64 bg-brand-navy rounded-full border-2 border-brand-teal flex items-center justify-center text-center p-6 shadow-lg shadow-brand-teal/20 transition-all duration-500 z-50 cursor-pointer;
+  }
+  
+  .node-core:hover {
+    @apply shadow-brand-teal/50 scale-105;
+  }
+  
+  .node-primary {
+    @apply absolute w-48 h-48 bg-brand-panel rounded-full border border-brand-cyan/50 flex flex-col items-center justify-center text-center p-4 backdrop-blur-sm transition-all duration-500 z-40 cursor-pointer;
+  }
+
+  .node-primary:hover {
+    @apply border-brand-pink shadow-lg shadow-brand-pink/20 scale-105;
+  }
+
+  .connection-line {
+    @apply absolute border-t border-brand-cyan/30 z-10 transition-all duration-500 origin-left;
+  }
+}
