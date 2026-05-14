@@ -1,37 +1,98 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    @apply bg-brand-darkBg text-brand-mist font-sans m-0 overflow-x-hidden;
+    @apply bg-white text-brand-navy font-sans m-0 overflow-x-hidden;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
+  }
+
+  ::selection {
+    background-color: #FF4D6D;
+    color: #fff;
+  }
+
+  /* Visible, brand-aligned focus rings */
+  :focus-visible {
+    outline: 2px solid #00B4D8;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Respect reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
 @layer components {
-  .map-container {
-    @apply relative w-full h-screen overflow-hidden flex items-center justify-center;
-  }
-  
-  .node-core {
-    @apply absolute w-64 h-64 bg-brand-navy rounded-full border-2 border-brand-teal flex items-center justify-center text-center p-6 shadow-lg shadow-brand-teal/20 transition-all duration-500 z-50 cursor-pointer;
-  }
-  
-  .node-core:hover {
-    @apply shadow-brand-teal/50 scale-105;
-  }
-  
-  .node-primary {
-    @apply absolute w-48 h-48 bg-brand-panel rounded-full border border-brand-cyan/50 flex flex-col items-center justify-center text-center p-4 backdrop-blur-sm transition-all duration-500 z-40 cursor-pointer;
+  /* Subtle dotted background utility, used decoratively across sections */
+  .bg-dotted {
+    background-image: radial-gradient(rgba(10, 25, 47, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
-  .node-primary:hover {
-    @apply border-brand-pink shadow-lg shadow-brand-pink/20 scale-105;
+  .bg-dotted-teal {
+    background-image: radial-gradient(rgba(0, 180, 216, 0.18) 1px, transparent 1px);
+    background-size: 28px 28px;
   }
 
-  .connection-line {
-    @apply absolute border-t border-brand-cyan/30 z-10 transition-all duration-500 origin-left;
+  .brand-gradient-text {
+    background-image: linear-gradient(120deg, #0A192F 0%, #00B4D8 60%, #FF4D6D 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
+
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-brand-navy/10 shadow-sm;
+  }
+
+  /* Reusable section header eyebrow chip */
+  .eyebrow {
+    @apply text-brand-pink font-bold tracking-[0.25em] text-xs uppercase;
+  }
+
+  /* Used for animated underline links */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.25s ease-out both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hide scrollbar for horizontal scroll containers but keep usable */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
