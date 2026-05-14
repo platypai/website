@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { motion } from 'framer-motion';
 
 const CorePhilosophy = () => {
@@ -128,7 +129,7 @@ const CorePhilosophy = () => {
 
             {/* Rows */}
             {methodologies[0].features.map((feature, rowIdx) => (
-              <React.Fragment key={rowIdx}>
+              <Fragment key={rowIdx}>
                 {/* Row Label */}
                 <div className="col-span-1 p-6 border-b border-brand-navy/10 bg-brand-mist/50 flex items-center">
                   <span className="font-bold text-brand-navy/60 text-xs tracking-widest uppercase">{feature.label}</span>
@@ -151,7 +152,7 @@ const CorePhilosophy = () => {
                     <p className="text-sm leading-relaxed">{method.features[rowIdx].desc}</p>
                   </motion.div>
                 ))}
-              </React.Fragment>
+              </Fragment>
             ))}
           </div>
         </div>
