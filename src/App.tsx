@@ -1,51 +1,33 @@
-import { useState } from 'react';
-import CoreMap from './components/Map/CoreMap';
-import Wayfinding from './components/Navigation/Wayfinding';
-import DeepDivePanel from './components/Panels/DeepDivePanel';
-import { siteContent } from './data/siteContent';
-import type { ActionableNode } from './data/siteContent';
+import Navbar from './components/Navigation/Navbar';
+import HeroSection from './components/Sections/HeroSection';
+import CorePhilosophy from './components/Sections/CorePhilosophy';
+import ArchitectureStack from './components/Sections/ArchitectureStack';
+import ServiceSystems from './components/Sections/ServiceSystems';
+import CaseStudies from './components/Sections/CaseStudies';
 
 function App() {
-  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
-  const [activeNode, setActiveNode] = useState<ActionableNode | null>(null);
-
-  const handleReset = () => {
-    setActiveCategoryId(null);
-    setActiveNode(null);
-  };
-
-  const handleCategoryClick = (categoryId: string) => {
-    setActiveCategoryId(categoryId);
-    setActiveNode(null);
-  };
-
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-brand-darkBg text-brand-mist font-sans">
-      {/* Background Starfield / Glow Effect */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-teal rounded-full blur-[150px]"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-cyan rounded-full blur-[150px]"></div>
-      </div>
+    <div className="w-full min-h-screen font-sans text-brand-navy bg-brand-mist selection:bg-brand-pink selection:text-white">
+      <Navbar />
+      
+      <main>
+        <HeroSection />
+        <CorePhilosophy />
+        <ArchitectureStack />
+        <ServiceSystems />
+        <CaseStudies />
+      </main>
 
-      <Wayfinding 
-        activeCategory={activeCategoryId ? siteContent.categories.find(c => c.id === activeCategoryId)?.label || null : null} 
-        activeNode={activeNode ? activeNode.label : null} 
-        onReset={handleReset} 
-        onCategoryClick={() => activeCategoryId && handleCategoryClick(activeCategoryId)} 
-      />
-
-      <div className="relative z-10 w-full h-full flex items-center justify-center">
-        <CoreMap 
-          activeCategory={activeCategoryId} 
-          setActiveCategory={setActiveCategoryId} 
-          setActiveNode={setActiveNode} 
-        />
-      </div>
-
-      <DeepDivePanel 
-        node={activeNode} 
-        onClose={() => setActiveNode(null)} 
-      />
+      {/* Simple Footer for Baseline */}
+      <footer className="bg-brand-darkBg text-white py-12 text-center border-t border-brand-teal/20">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-2xl font-bold mb-4">Ready to accelerate your learning transformation?</h2>
+          <button className="px-8 py-3 bg-brand-teal text-white font-bold rounded shadow-lg hover:bg-brand-cyan hover:text-brand-navy transition-all mb-8">
+            Start Building
+          </button>
+          <p className="text-brand-mist/50 text-sm">© {new Date().getFullYear()} PlatypAI. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
