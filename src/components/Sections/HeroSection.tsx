@@ -73,7 +73,7 @@ const HeroSection = () => {
             >
               <a
                 href="#systems"
-                className="px-6 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-colors flex items-center justify-center group shadow-md shadow-brand-teal/25"
+                className="w-full sm:w-auto px-6 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-colors inline-flex items-center justify-center group shadow-md shadow-brand-teal/25"
               >
                 Explore the Systems
                 <ArrowRight
@@ -83,7 +83,7 @@ const HeroSection = () => {
               </a>
               <a
                 href="mailto:arpan@platypai.one?subject=PlatypAI%20%E2%80%94%20Discovery%20enquiry"
-                className="px-6 py-3.5 border-2 border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:border-brand-teal hover:text-brand-teal transition-colors flex items-center justify-center"
+                className="w-full sm:w-auto px-6 py-3.5 border-2 border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:border-brand-teal hover:text-brand-teal transition-colors inline-flex items-center justify-center"
               >
                 Book a Discovery Session
               </a>
@@ -124,7 +124,22 @@ const HeroSection = () => {
   );
 };
 
+/**
+ * Two-layer flow metaphor:
+ *   raw inputs (left) → EXPERTS column (large, teal) → AI column (smaller, pink) → branched deliverables (right).
+ * Layer-1 (Experts) is wider/bolder; Layer-2 (AI) is narrower and smaller. This communicates
+ * that experts shape the system first, and AI amplifies inside the boundary experts set.
+ */
 const HeroMetaphor = () => {
+  // Geometry constants — both layers vertically centered on the same band
+  const expertsX = 175;
+  const expertsW = 42;
+  const aiX = 248;
+  const aiW = 28;
+  const bandTop = 130;
+  const bandBottom = 370;
+  const bandH = bandBottom - bandTop;
+
   return (
     <div className="relative w-full max-w-[440px] h-full">
       <svg
@@ -134,10 +149,15 @@ const HeroMetaphor = () => {
         aria-hidden="true"
       >
         <defs>
-          <linearGradient id="filterGrad" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id="expertsGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#00B4D8" stopOpacity="0" />
-            <stop offset="50%" stopColor="#00B4D8" stopOpacity="0.45" />
+            <stop offset="50%" stopColor="#00B4D8" stopOpacity="0.55" />
             <stop offset="100%" stopColor="#00B4D8" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="aiGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FF4D6D" stopOpacity="0" />
+            <stop offset="50%" stopColor="#FF4D6D" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#FF4D6D" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="flow1" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="#00B4D8" stopOpacity="0" />
@@ -156,13 +176,13 @@ const HeroMetaphor = () => {
         </defs>
 
         {/* Soft colored ribbon behind everything */}
-        <rect x="-20" y="160" width="480" height="180" rx="90" fill="url(#ribbonGrad)" opacity="0.25" />
+        <rect x="-20" y={bandTop + 20} width="480" height={bandH - 40} rx="90" fill="url(#ribbonGrad)" opacity="0.22" />
 
-        {/* Flowing input lines */}
+        {/* Flowing input lines — raw → first layer */}
         {[80, 160, 240, 320, 400].map((y, i) => (
           <motion.path
             key={`flow-${i}`}
-            d={`M 0 ${y} Q 110 ${y - 40 + i * 8} 220 250 T 440 ${y + 20}`}
+            d={`M 0 ${y} Q 90 ${y - 40 + i * 8} 175 250`}
             fill="none"
             stroke={i % 2 === 0 ? 'url(#flow1)' : 'url(#flow2)'}
             strokeWidth="1.5"
@@ -177,29 +197,88 @@ const HeroMetaphor = () => {
           />
         ))}
 
-        {/* Filter column */}
-        <rect x="200" y="120" width="40" height="260" rx="6" fill="url(#filterGrad)" />
-        <rect
-          x="200"
-          y="120"
-          width="40"
-          height="260"
-          rx="6"
-          fill="none"
-          stroke="#00B4D8"
-          strokeOpacity="0.45"
-        />
+        {/* Connector lines between Experts → AI layer (3 narrow streams) */}
+        {[210, 250, 290].map((y, i) => (
+          <motion.path
+            key={`bridge-${i}`}
+            d={`M ${expertsX + expertsW} ${y} L ${aiX} ${y}`}
+            fill="none"
+            stroke="#00B4D8"
+            strokeOpacity="0.5"
+            strokeWidth="1.25"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1, opacity: [0.2, 0.9, 0.2] }}
+            transition={{
+              duration: 2.4,
+              repeat: Infinity,
+              delay: i * 0.3,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+
+        {/* Branched output lines — AI → deliverables grid */}
+        {[
+          { y1: 200, y2: 170 },
+          { y1: 240, y2: 240 },
+          { y1: 280, y2: 310 },
+        ].map((b, i) => (
+          <motion.path
+            key={`branch-${i}`}
+            d={`M ${aiX + aiW} ${b.y1} Q 330 ${(b.y1 + b.y2) / 2} 380 ${b.y2}`}
+            fill="none"
+            stroke="#0A192F"
+            strokeOpacity="0.18"
+            strokeWidth="1.25"
+            strokeDasharray="3 3"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 3 + i * 0.3,
+              repeat: Infinity,
+              delay: 0.5 + i * 0.4,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+
+        {/* Experts column (Layer 1, larger) */}
+        <rect x={expertsX} y={bandTop} width={expertsW} height={bandH} rx="7" fill="url(#expertsGrad)" />
+        <rect x={expertsX} y={bandTop} width={expertsW} height={bandH} rx="7" fill="none" stroke="#00B4D8" strokeOpacity="0.55" strokeWidth="1.25" />
         <text
-          x="220"
-          y="250"
+          x={expertsX + expertsW / 2}
+          y={(bandTop + bandBottom) / 2}
           textAnchor="middle"
-          transform="rotate(-90, 220, 250)"
-          fontSize="9"
+          transform={`rotate(-90, ${expertsX + expertsW / 2}, ${(bandTop + bandBottom) / 2})`}
+          fontSize="13"
           fontWeight="700"
-          letterSpacing="2"
+          letterSpacing="3.5"
           fill="#00B4D8"
         >
-          EXPERTISE FILTER
+          EXPERTS
+        </text>
+        {/* layer 1 tag */}
+        <text x={expertsX + expertsW / 2} y={bandTop - 10} textAnchor="middle" fontSize="9" fontWeight="700" letterSpacing="2" fill="#00B4D8" opacity="0.7">
+          LAYER 1
+        </text>
+
+        {/* AI column (Layer 2, smaller) */}
+        <rect x={aiX} y={bandTop + 30} width={aiW} height={bandH - 60} rx="6" fill="url(#aiGrad)" />
+        <rect x={aiX} y={bandTop + 30} width={aiW} height={bandH - 60} rx="6" fill="none" stroke="#FF4D6D" strokeOpacity="0.55" strokeWidth="1.25" />
+        <text
+          x={aiX + aiW / 2}
+          y={(bandTop + bandBottom) / 2}
+          textAnchor="middle"
+          transform={`rotate(-90, ${aiX + aiW / 2}, ${(bandTop + bandBottom) / 2})`}
+          fontSize="11"
+          fontWeight="700"
+          letterSpacing="3"
+          fill="#FF4D6D"
+        >
+          AI
+        </text>
+        <text x={aiX + aiW / 2} y={bandTop + 18} textAnchor="middle" fontSize="9" fontWeight="700" letterSpacing="2" fill="#FF4D6D" opacity="0.7">
+          LAYER 2
         </text>
       </svg>
 
@@ -208,9 +287,9 @@ const HeroMetaphor = () => {
         <motion.div
           key={`raw-${i}`}
           className="absolute w-1.5 h-1.5 rounded-full bg-brand-navy/30"
-          style={{ left: '6%', top: `${10 + (i * 6) % 80}%` }}
+          style={{ left: '4%', top: `${10 + (i * 6) % 80}%` }}
           animate={{
-            x: [0, 60, 80],
+            x: [0, 50, 70],
             y: [(Math.random() - 0.5) * 20, (Math.random() - 0.5) * 10, 0],
             opacity: [0, 0.7, 0],
           }}
@@ -223,7 +302,7 @@ const HeroMetaphor = () => {
         />
       ))}
 
-      {/* Structured output grid */}
+      {/* Branched deliverables grid (right) */}
       <div className="absolute right-2 top-1/2 -translate-y-1/2 grid grid-cols-3 gap-2.5">
         {Array.from({ length: 12 }).map((_, i) => (
           <motion.div
@@ -236,7 +315,7 @@ const HeroMetaphor = () => {
               delay: (i * 0.15) % 2,
               ease: 'easeInOut',
             }}
-            className={`w-8 h-8 rounded-md border ${
+            className={`w-9 h-9 rounded-md border ${
               i % 5 === 0
                 ? 'border-brand-pink/40 bg-brand-pink/15'
                 : 'border-brand-teal/40 bg-brand-cyan/30'
@@ -245,11 +324,11 @@ const HeroMetaphor = () => {
         ))}
       </div>
 
-      {/* Floating capability labels */}
+      {/* Floating capability labels — larger, more readable */}
       {[
         { label: 'Curriculum', top: '14%', delay: 0, color: 'text-brand-teal' },
-        { label: 'Knowledge', top: '42%', delay: 0.8, color: 'text-brand-pink' },
-        { label: 'Workflows', top: '70%', delay: 1.6, color: 'text-brand-teal' },
+        { label: 'Knowledge', top: '44%', delay: 0.8, color: 'text-brand-pink' },
+        { label: 'Workflows', top: '72%', delay: 1.6, color: 'text-brand-teal' },
       ].map((cap) => (
         <motion.div
           key={cap.label}
@@ -262,7 +341,7 @@ const HeroMetaphor = () => {
             ease: 'easeInOut',
             times: [0, 0.2, 0.8, 1],
           }}
-          className={`absolute left-[68%] text-[10px] font-bold tracking-[0.2em] uppercase ${cap.color}`}
+          className={`hidden sm:block absolute left-[72%] text-[11px] font-bold tracking-[0.2em] uppercase ${cap.color}`}
           style={{ top: cap.top }}
         >
           {cap.label}

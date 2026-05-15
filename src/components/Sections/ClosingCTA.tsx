@@ -6,7 +6,7 @@ interface Founder {
   title: string;
   email: string;
   linkedin: string;
-  tone: 'teal' | 'pink' | 'cyan';
+  tone: 'teal' | 'pink' | 'navy';
 }
 
 const founders: Founder[] = [
@@ -29,14 +29,15 @@ const founders: Founder[] = [
     title: 'Co-founder · Advisor',
     email: 'radhika@platypai.one',
     linkedin: 'https://www.linkedin.com/in/radhikakale',
-    tone: 'cyan',
+    tone: 'navy',
   },
 ];
 
+// Three visually distinct gradients, all with white text for consistency
 const toneInitial = {
-  teal: 'bg-gradient-to-br from-brand-teal to-brand-cyan text-white',
-  pink: 'bg-gradient-to-br from-brand-pink to-[#FF8FA3] text-white',
-  cyan: 'bg-gradient-to-br from-brand-cyan to-brand-teal text-brand-navy',
+  teal: 'bg-gradient-to-br from-brand-teal to-[#0077B6] text-white',
+  pink: 'bg-gradient-to-br from-brand-pink to-[#C9184A] text-white',
+  navy: 'bg-gradient-to-br from-brand-navy to-[#1B3A5C] text-white',
 };
 
 const ClosingCTA = () => {
@@ -61,10 +62,10 @@ const ClosingCTA = () => {
             AI is a great vehicle to speed and scale things up — when you have an expert driving. Reach out to one of our founders to map your business need to a working system.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-10">
             <a
               href="mailto:arpan@platypai.one?subject=PlatypAI%20%E2%80%94%20Discovery%20session"
-              className="inline-flex items-center px-7 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-all hover:shadow-[0_10px_30px_-10px_rgba(0,180,216,0.5)] group shadow-md shadow-brand-teal/25"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-all hover:shadow-[0_10px_30px_-10px_rgba(0,180,216,0.5)] group shadow-md shadow-brand-teal/25"
             >
               <Mail size={16} className="mr-2" />
               Book a Discovery Session
@@ -75,7 +76,7 @@ const ClosingCTA = () => {
             </a>
             <a
               href="#systems"
-              className="inline-flex items-center px-7 py-3.5 border-2 border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:border-brand-teal hover:text-brand-teal transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 border-2 border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:border-brand-teal hover:text-brand-teal transition-colors"
             >
               Explore Systems First
             </a>

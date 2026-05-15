@@ -242,21 +242,41 @@ const TierCard = ({ tier, name, tagline, tone, dimensions, valueKey, featured }:
       )}
 
       <div className="p-5 md:p-6 border-b border-current/10">
-        <div className="flex items-center gap-1.5 mb-3" aria-label={`Tier ${tier} of 3`}>
-          {[1, 2, 3].map((d) => (
-            <span
-              key={d}
-              className={`h-1.5 rounded-full ${
-                d <= filledDots
-                  ? featured
-                    ? 'bg-brand-teal w-6'
-                    : 'bg-brand-navy/60 w-5'
-                  : featured
-                  ? 'bg-white/15 w-3'
-                  : 'bg-brand-navy/15 w-3'
-              }`}
-            />
-          ))}
+        {/* Maturity bars — 3 ascending vertical bars, lit up to tier */}
+        <div
+          className="flex items-end gap-1 mb-3 h-4"
+          aria-label={`Maturity tier ${tier} of 3`}
+          role="img"
+        >
+          {[
+            { id: 1, h: 6 },
+            { id: 2, h: 10 },
+            { id: 3, h: 14 },
+          ].map((b) => {
+            const lit = b.id <= filledDots;
+            return (
+              <span
+                key={b.id}
+                style={{ height: `${b.h}px` }}
+                className={`w-1 rounded-[1px] ${
+                  lit
+                    ? featured
+                      ? 'bg-brand-teal'
+                      : 'bg-brand-navy/65'
+                    : featured
+                    ? 'bg-white/15'
+                    : 'bg-brand-navy/15'
+                }`}
+              />
+            );
+          })}
+          <span
+            className={`ml-2 text-[10px] font-bold tracking-[0.2em] uppercase ${
+              featured ? 'text-brand-cyan' : 'text-brand-navy/55'
+            }`}
+          >
+            Tier {tier}/3
+          </span>
         </div>
 
         <div className="flex items-baseline justify-between gap-2">

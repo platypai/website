@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { Layers, Database, Target, Settings, Monitor } from 'lucide-react';
 import SwipeHint from '../Brand/SwipeHint';
 
@@ -66,34 +66,12 @@ const steps: Step[] = [
 const ArchitectureStack = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [active, setActive] = useState<number>(3); // default highlight Expert Calibration
-  // Once a user manually picks a step, stop the scroll-driven auto-advance
-  const [userPinned, setUserPinned] = useState(false);
 
+  // Smooth scroll progress for the connector fill only — no React state churn.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start 80%', 'end 20%'],
   });
-
-  // Scroll-driven active step on desktop (skip if user has clicked a tile)
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    if (userPinned) return;
-    // 5 steps → 5 bands of equal scroll progress
-    const idx = Math.min(steps.length - 1, Math.max(0, Math.floor(latest * steps.length)));
-    const nextId = steps[idx].id;
-    setActive((prev) => (prev !== nextId ? nextId : prev));
-  });
-
-  // Reset pin after some idle time so scroll-driven mode resumes
-  useEffect(() => {
-    if (!userPinned) return;
-    const t = window.setTimeout(() => setUserPinned(false), 6000);
-    return () => window.clearTimeout(t);
-  }, [userPinned, active]);
-
-  const onTileClick = (id: number) => {
-    setActive(id);
-    setUserPinned(true);
-  };
 
   const activeStep = steps.find((s) => s.id === active) ?? steps[2];
 
@@ -118,16 +96,9 @@ const ArchitectureStack = () => {
 
         {/* Stack — horizontal flow */}
         <div className="relative">
-          {/* Direction label / swipe hint */}
-          <div className="flex items-center justify-between mb-3 text-[10px] font-bold text-brand-navy/45 tracking-[0.25em] uppercase gap-3">
-            <span>Start · Bottom of stack</span>
+          {/* Mobile swipe hint only */}
+          <div className="flex justify-end mb-3 md:hidden">
             <SwipeHint />
-            <span className="hidden md:flex items-center gap-2">
-              Top of stack · Output
-              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M1 5 H 13 M9 1 L 13 5 L 9 9" />
-              </svg>
-            </span>
           </div>
 
           {/* Connecting line behind tiles (desktop) */}
@@ -148,7 +119,7 @@ const ArchitectureStack = () => {
                   <motion.button
                     type="button"
                     key={step.id}
-                    onClick={() => onTileClick(step.id)}
+                    onClick={() => setActive(step.id)}
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-40px' }}

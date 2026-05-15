@@ -19,43 +19,44 @@ interface CounterProps {
  *   "5K+"     → animates 0..5 + "K+"
  *   "8×"      → animates 0..8 + "×"
  */
-const Counter = ({ value, duration = 1200, className = '' }: CounterProps) => {
+const Counter = ({ value, duration = 1100, className = '' }: CounterProps) => {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const inView = useInView(ref, { once: true, margin: '-30px' });
-  const [display, setDisplay] = useState<string>(value);
+  const inView = useInView(ref, { once: true, margin: '0px 0px -10% 0px' });
 
-  // Split into numeric prefix and trailing suffix
+  // Parse numeric prefix + suffix
   const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
   const target = match ? parseFloat(match[1]) : 0;
   const suffix = match ? match[2] : '';
   const isInteger = match ? !match[1].includes('.') : true;
 
-  useEffect(() => {
-    if (!match) return; // no numeric prefix — render value as-is
-    if (!inView) {
-      setDisplay(`0${suffix}`);
-      return;
-    }
+  // Initialize at 0 (or just `value` for non-numeric) to avoid a "target → 0 → animate" flash
+  const initial = match ? `0${suffix}` : value;
+  const [display, setDisplay] = useState<string>(initial);
 
-    let raf = 0;
+  useEffect(() => {
+    if (!match || !inView) return;
+    let cancelled = false;
     const start = performance.now();
-    const animate = (now: number) => {
-      const elapsed = now - start;
-      const t = Math.min(1, elapsed / duration);
+    const tick = (now: number) => {
+      if (cancelled) return;
+      const t = Math.min(1, (now - start) / duration);
       // easeOutCubic
       const eased = 1 - Math.pow(1 - t, 3);
       const current = target * eased;
       const rounded = isInteger ? Math.round(current) : Math.round(current * 10) / 10;
       setDisplay(`${rounded}${suffix}`);
-      if (t < 1) raf = requestAnimationFrame(animate);
+      if (t < 1) requestAnimationFrame(tick);
+      else setDisplay(`${target}${suffix}`); // snap to exact target
     };
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
+    requestAnimationFrame(tick);
+    return () => {
+      cancelled = true;
+    };
   }, [inView, duration, target, suffix, isInteger, match]);
 
   return (
     <span ref={ref} className={className} aria-label={value}>
-      {match ? display : value}
+      {display}
     </span>
   );
 };

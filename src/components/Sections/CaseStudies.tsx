@@ -224,21 +224,21 @@ const CaseStudies = () => {
                 </Section>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="bg-brand-navy text-white rounded-xl p-5">
+                  <div className="bg-brand-mist border border-brand-navy/10 rounded-xl p-5">
                     <div className="flex items-center gap-2 mb-1.5 text-brand-pink">
                       <Sparkles size={14} />
-                      <span className="text-[10px] font-bold tracking-[0.2em] uppercase">
+                      <span className="text-[10px] font-bold tracking-[0.25em] uppercase">
                         What AI Did
                       </span>
                     </div>
-                    <p className="text-sm text-brand-mist/90 leading-relaxed">
+                    <p className="text-sm text-brand-navy/80 leading-relaxed">
                       {activeProgram.aiRole}
                     </p>
                   </div>
                   <div className="bg-brand-mist border border-brand-navy/10 rounded-xl p-5">
                     <div className="flex items-center gap-2 mb-1.5 text-brand-teal">
                       <ShieldCheck size={14} />
-                      <span className="text-[10px] font-bold tracking-[0.2em] uppercase">
+                      <span className="text-[10px] font-bold tracking-[0.25em] uppercase">
                         What Experts Did
                       </span>
                     </div>

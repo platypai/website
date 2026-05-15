@@ -101,7 +101,7 @@ const TrustSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: (idx % 3) * 0.07 }}
-              className="bg-white/[0.04] border border-white/10 rounded-2xl p-5 md:p-6 hover:bg-white/[0.07] hover:border-brand-teal/40 transition-all relative overflow-hidden"
+              className="bg-white/[0.04] border border-white/10 rounded-2xl p-5 md:p-6 hover:bg-white/[0.07] hover:border-brand-teal/40 transition-all relative overflow-hidden flex flex-col h-full"
             >
               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-teal/40 to-transparent" />
               <div className="flex items-center gap-3 mb-3">
@@ -116,9 +116,9 @@ const TrustSection = () => {
               <h3 className="font-bold text-white text-base md:text-lg mb-2 leading-tight">
                 {p.title}
               </h3>
-              <p className="text-sm text-brand-mist/75 leading-relaxed mb-4">{p.body}</p>
+              <p className="text-sm text-brand-mist/75 leading-relaxed mb-4 flex-1">{p.body}</p>
 
-              <div className="pt-3 border-t border-white/10">
+              <div className="mt-auto pt-3 border-t border-white/10">
                 <div className="text-[9px] font-bold text-brand-cyan tracking-[0.25em] uppercase mb-1">
                   Why it matters
                 </div>
