@@ -63,7 +63,7 @@ const toneClasses = {
   cyan: {
     chipBg: 'bg-brand-cyan',
     chipText: 'text-brand-navy',
-    outputText: 'text-[#0077B6]',
+    outputText: 'text-brand-navy',
     ring: 'ring-brand-cyan/30',
   },
   pink: {

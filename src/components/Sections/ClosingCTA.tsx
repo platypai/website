@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 import { Mail, ArrowRight, Linkedin } from 'lucide-react';
+import PlatypusMark from '../Brand/PlatypusMark';
 
 interface Founder {
   name: string;
   title: string;
   email: string;
   linkedin: string;
-  tone: 'teal' | 'pink' | 'navy';
+  tone: 'teal' | 'pink' | 'byzantium';
 }
 
 const founders: Founder[] = [
@@ -29,15 +30,16 @@ const founders: Founder[] = [
     title: 'Co-founder · Advisor',
     email: 'radhika@platypai.one',
     linkedin: 'https://www.linkedin.com/in/radhikakale',
-    tone: 'navy',
+    tone: 'byzantium',
   },
 ];
 
-// Three visually distinct gradients, all with white text for consistency
+// Three visually distinct on-brand gradients, all with white text for consistency.
+// Byzantium (rich purple) gives the third founder a clearly distinct chip — not navy/black.
 const toneInitial = {
-  teal: 'bg-gradient-to-br from-brand-teal to-[#0077B6] text-white',
-  pink: 'bg-gradient-to-br from-brand-pink to-[#C9184A] text-white',
-  navy: 'bg-gradient-to-br from-brand-navy to-[#1B3A5C] text-white',
+  teal: 'bg-gradient-to-br from-brand-teal to-[#2BA39C] text-white',
+  pink: 'bg-gradient-to-br from-brand-pink to-[#A8143A] text-white',
+  byzantium: 'bg-gradient-to-br from-brand-byzantium to-[#4B2649] text-white',
 };
 
 const ClosingCTA = () => {
@@ -45,6 +47,14 @@ const ClosingCTA = () => {
     <section className="relative py-16 md:py-24 bg-white overflow-hidden">
       <div className="absolute inset-0 bg-dotted-teal opacity-40 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[140%] rounded-full bg-gradient-to-br from-brand-cyan/20 via-transparent to-brand-pink/15 blur-3xl pointer-events-none" />
+
+      {/* Subtle platypus motif watermark — large, very low opacity */}
+      <div className="hidden md:block absolute -left-16 top-1/2 -translate-y-1/2 pointer-events-none">
+        <PlatypusMark size={320} opacity={0.06} />
+      </div>
+      <div className="hidden md:block absolute -right-12 bottom-8 pointer-events-none rotate-12">
+        <PlatypusMark size={180} opacity={0.05} />
+      </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
         <motion.div
@@ -56,7 +66,7 @@ const ClosingCTA = () => {
           <span className="eyebrow mb-4 block">Let's Build Together</span>
           <h2 className="text-[2.5rem] sm:text-4xl md:text-6xl font-bold text-brand-navy leading-[1.04] tracking-tight mb-5">
             Ready to scale your{' '}
-            <span className="text-brand-teal">learning transformation?</span>
+            <span className="text-brand-pink">learning transformation?</span>
           </h2>
           <p className="text-base md:text-xl text-brand-navy/70 max-w-2xl mx-auto leading-relaxed mb-8">
             AI is a great vehicle to speed and scale things up — when you have an expert driving. Reach out to one of our founders to map your business need to a working system.
@@ -65,7 +75,7 @@ const ClosingCTA = () => {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-10">
             <a
               href="mailto:arpan@platypai.one?subject=PlatypAI%20%E2%80%94%20Discovery%20session"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-all hover:shadow-[0_10px_30px_-10px_rgba(0,180,216,0.5)] group shadow-md shadow-brand-teal/25"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 bg-brand-teal text-brand-navy font-semibold rounded-lg hover:bg-[#2BA39C] hover:text-white transition-all hover:shadow-[0_10px_30px_-10px_rgba(78,205,196,0.55)] group shadow-md shadow-brand-teal/30"
             >
               <Mail size={16} className="mr-2" />
               Book a Discovery Session
@@ -76,7 +86,7 @@ const ClosingCTA = () => {
             </a>
             <a
               href="#systems"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 border-2 border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:border-brand-teal hover:text-brand-teal transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 border-2 border-brand-navy/20 text-brand-navy font-semibold rounded-lg hover:border-brand-pink hover:text-brand-pink transition-colors"
             >
               Explore Systems First
             </a>

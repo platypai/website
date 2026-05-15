@@ -74,7 +74,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-brand-navy/75 hover:text-brand-teal font-medium text-sm transition-colors link-underline"
+                className="text-brand-navy/75 hover:text-brand-pink font-medium text-sm transition-colors link-underline"
               >
                 {link.label}
               </a>
@@ -83,7 +83,7 @@ const Navbar = () => {
 
           <a
             href={`mailto:${CONTACT_EMAIL}?subject=PlatypAI%20%E2%80%94%20Discovery%20enquiry`}
-            className="hidden md:inline-flex items-center px-5 py-2.5 bg-brand-teal text-white text-sm font-semibold rounded-lg hover:bg-[#0096B8] transition-colors shadow-sm"
+            className="hidden md:inline-flex items-center px-5 py-2.5 bg-brand-teal text-brand-navy text-sm font-semibold rounded-lg hover:bg-[#2BA39C] hover:text-white transition-colors shadow-sm"
           >
             <Mail size={14} className="mr-2" />
             Start Building
@@ -161,7 +161,7 @@ const Navbar = () => {
               <div className="px-6 py-6 border-t border-brand-navy/10 space-y-3">
                 <a
                   href={`mailto:${CONTACT_EMAIL}?subject=PlatypAI%20%E2%80%94%20Discovery%20enquiry`}
-                  className="flex items-center justify-center px-5 py-3 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-colors shadow-sm"
+                  className="flex items-center justify-center px-5 py-3 bg-brand-teal text-brand-navy font-semibold rounded-lg hover:bg-[#2BA39C] hover:text-white transition-colors shadow-sm"
                   onClick={() => setOpen(false)}
                 >
                   <Mail size={16} className="mr-2" />

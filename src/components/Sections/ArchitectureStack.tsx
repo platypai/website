@@ -84,10 +84,8 @@ const ArchitectureStack = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-10 max-w-3xl">
           <span className="eyebrow mb-3 block">The Architecture</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-navy leading-[1.05] mb-4">
-            Expert-in-the-Loop is not a review step.
-            <br />
-            It is the architecture.
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-navy leading-[1.05] mb-4 max-w-4xl">
+            Expert-in-the-Loop is not a review step. It is the architecture.
           </h2>
           <p className="text-base md:text-lg text-brand-navy/70 leading-relaxed">
             We are consulting-first. The stack flows left to right — from business need through to the systems your users actually touch. Tap a step to see how AI and experts each show up.

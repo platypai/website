@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, X, Sparkles, ShieldCheck, TrendingUp } from 'lucide-react';
 import { caseStudyPrograms } from '../../data/caseStudies';
 import type { CaseStudyProgram } from '../../data/caseStudies';
-import Counter from '../Brand/Counter';
 
 const accentMap = {
   teal: {
@@ -81,10 +80,9 @@ const CaseStudies = () => {
 
                 {/* Big metric — the single color moment per card */}
                 <div className="flex items-baseline gap-3 mb-2">
-                  <Counter
-                    value={program.metric}
-                    className={`text-5xl md:text-6xl font-bold ${a.text} leading-none tabular-nums`}
-                  />
+                  <div className={`text-5xl md:text-6xl font-bold ${a.text} leading-none tabular-nums`}>
+                    {program.metric}
+                  </div>
                   <TrendingUp size={18} className={`${a.text} opacity-70`} />
                 </div>
                 <p className="text-[11px] font-semibold text-brand-navy/55 uppercase tracking-wider mb-5 leading-snug">
@@ -111,7 +109,7 @@ const CaseStudies = () => {
                   <span className="text-xs font-semibold text-brand-navy/60">
                     {program.domain}
                   </span>
-                  <span className="text-brand-navy text-xs font-bold inline-flex items-center group-hover:text-brand-teal transition-colors">
+                  <span className="text-brand-navy text-xs font-bold inline-flex items-center group-hover:text-brand-pink transition-colors">
                     Read case
                     <ArrowUpRight
                       size={14}
@@ -179,10 +177,9 @@ const CaseStudies = () => {
               <div className="px-6 md:px-10 py-7 space-y-7">
                 {/* Hero metric */}
                 <div className={`rounded-2xl p-6 ${accentMap[activeProgram.accent].soft} border ${accentMap[activeProgram.accent].border} flex items-center gap-5`}>
-                  <Counter
-                    value={activeProgram.metric}
-                    className={`text-5xl md:text-6xl font-bold ${accentMap[activeProgram.accent].text} leading-none tabular-nums`}
-                  />
+                  <div className={`text-5xl md:text-6xl font-bold ${accentMap[activeProgram.accent].text} leading-none tabular-nums`}>
+                    {activeProgram.metric}
+                  </div>
                   <div>
                     <div className="text-xs font-bold text-brand-navy/55 uppercase tracking-wider mb-1">
                       The Outcome
@@ -251,7 +248,7 @@ const CaseStudies = () => {
                 <div className="pt-1 flex flex-col sm:flex-row gap-3">
                   <a
                     href="mailto:arpan@platypai.one?subject=PlatypAI%20%E2%80%94%20Program%20enquiry"
-                    className="flex-1 px-6 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-colors text-center shadow-sm"
+                    className="flex-1 px-6 py-3.5 bg-brand-teal text-brand-navy font-semibold rounded-lg hover:bg-[#2BA39C] hover:text-white transition-colors text-center shadow-sm"
                   >
                     Start a similar program
                   </a>

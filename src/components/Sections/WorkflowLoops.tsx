@@ -32,7 +32,7 @@ const WorkflowLoops = () => {
         <div className="mb-10 md:mb-14 max-w-3xl">
           <span className="eyebrow mb-3 block">Workflow Methodology</span>
           <h2 className="text-4xl md:text-5xl font-bold text-brand-navy leading-[1.05] mb-4">
-            Two loops. <span className="text-brand-teal">Expert-designed first.</span> Then automation with expert audits.
+            Two loops. <span className="text-brand-pink">Expert-designed first.</span> Then automation with expert audits.
           </h2>
           <p className="text-base md:text-lg text-brand-navy/70 leading-relaxed">
             PlatypAI does not jump from source material to generated output. We design the production system first, then run it at scale with targeted audits, refinements, and escalation points.
@@ -90,7 +90,7 @@ const LoopCard = ({ label, title, subtitle, tone, steps }: LoopCardProps) => {
   const accentSoft = isTeal ? 'bg-brand-teal/10' : 'bg-brand-pink/10';
   const ribbon = isTeal
     ? 'from-brand-teal to-brand-cyan'
-    : 'from-brand-pink to-[#FF8FA3]';
+    : 'from-brand-pink to-[#F26789]';
 
   return (
     <motion.div

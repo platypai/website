@@ -53,7 +53,7 @@ const HeroSection = () => {
             >
               Human expertise.
               <br />
-              <span className="text-brand-teal">AI amplified.</span>
+              <span className="text-brand-pink">AI amplified.</span>
             </motion.h1>
 
             <motion.p
@@ -73,7 +73,7 @@ const HeroSection = () => {
             >
               <a
                 href="#systems"
-                className="w-full sm:w-auto px-6 py-3.5 bg-brand-teal text-white font-semibold rounded-lg hover:bg-[#0096B8] transition-colors inline-flex items-center justify-center group shadow-md shadow-brand-teal/25"
+                className="w-full sm:w-auto px-6 py-3.5 bg-brand-teal text-brand-navy font-semibold rounded-lg hover:bg-[#2BA39C] hover:text-white transition-colors inline-flex items-center justify-center group shadow-md shadow-brand-teal/30"
               >
                 Explore the Systems
                 <ArrowRight
@@ -83,7 +83,7 @@ const HeroSection = () => {
               </a>
               <a
                 href="mailto:arpan@platypai.one?subject=PlatypAI%20%E2%80%94%20Discovery%20enquiry"
-                className="w-full sm:w-auto px-6 py-3.5 border-2 border-brand-navy/15 text-brand-navy font-semibold rounded-lg hover:border-brand-teal hover:text-brand-teal transition-colors inline-flex items-center justify-center"
+                className="w-full sm:w-auto px-6 py-3.5 border-2 border-brand-navy/20 text-brand-navy font-semibold rounded-lg hover:border-brand-pink hover:text-brand-pink transition-colors inline-flex items-center justify-center"
               >
                 Book a Discovery Session
               </a>
@@ -150,28 +150,28 @@ const HeroMetaphor = () => {
       >
         <defs>
           <linearGradient id="expertsGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#00B4D8" stopOpacity="0" />
-            <stop offset="50%" stopColor="#00B4D8" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#00B4D8" stopOpacity="0" />
+            <stop offset="0%" stopColor="#4ECDC4" stopOpacity="0" />
+            <stop offset="50%" stopColor="#4ECDC4" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#4ECDC4" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="aiGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FF4D6D" stopOpacity="0" />
-            <stop offset="50%" stopColor="#FF4D6D" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#FF4D6D" stopOpacity="0" />
+            <stop offset="0%" stopColor="#E01C4A" stopOpacity="0" />
+            <stop offset="50%" stopColor="#E01C4A" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#E01C4A" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="flow1" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#00B4D8" stopOpacity="0" />
-            <stop offset="50%" stopColor="#00B4D8" stopOpacity="0.7" />
-            <stop offset="100%" stopColor="#00B4D8" stopOpacity="0" />
+            <stop offset="0%" stopColor="#4ECDC4" stopOpacity="0" />
+            <stop offset="50%" stopColor="#4ECDC4" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#4ECDC4" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="flow2" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#FF4D6D" stopOpacity="0" />
-            <stop offset="50%" stopColor="#FF4D6D" stopOpacity="0.65" />
-            <stop offset="100%" stopColor="#FF4D6D" stopOpacity="0" />
+            <stop offset="0%" stopColor="#E01C4A" stopOpacity="0" />
+            <stop offset="50%" stopColor="#E01C4A" stopOpacity="0.65" />
+            <stop offset="100%" stopColor="#E01C4A" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="ribbonGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#00B4D8" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#FF4D6D" stopOpacity="0.35" />
+            <stop offset="0%" stopColor="#4ECDC4" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#E01C4A" stopOpacity="0.35" />
           </linearGradient>
         </defs>
 
@@ -203,7 +203,7 @@ const HeroMetaphor = () => {
             key={`bridge-${i}`}
             d={`M ${expertsX + expertsW} ${y} L ${aiX} ${y}`}
             fill="none"
-            stroke="#00B4D8"
+            stroke="#4ECDC4"
             strokeOpacity="0.5"
             strokeWidth="1.25"
             initial={{ pathLength: 0 }}
@@ -227,7 +227,7 @@ const HeroMetaphor = () => {
             key={`branch-${i}`}
             d={`M ${aiX + aiW} ${b.y1} Q 330 ${(b.y1 + b.y2) / 2} 380 ${b.y2}`}
             fill="none"
-            stroke="#0A192F"
+            stroke="#0F3559"
             strokeOpacity="0.18"
             strokeWidth="1.25"
             strokeDasharray="3 3"
@@ -244,7 +244,7 @@ const HeroMetaphor = () => {
 
         {/* Experts column (Layer 1, larger) */}
         <rect x={expertsX} y={bandTop} width={expertsW} height={bandH} rx="7" fill="url(#expertsGrad)" />
-        <rect x={expertsX} y={bandTop} width={expertsW} height={bandH} rx="7" fill="none" stroke="#00B4D8" strokeOpacity="0.55" strokeWidth="1.25" />
+        <rect x={expertsX} y={bandTop} width={expertsW} height={bandH} rx="7" fill="none" stroke="#4ECDC4" strokeOpacity="0.55" strokeWidth="1.25" />
         <text
           x={expertsX + expertsW / 2}
           y={(bandTop + bandBottom) / 2}
@@ -253,32 +253,25 @@ const HeroMetaphor = () => {
           fontSize="13"
           fontWeight="700"
           letterSpacing="3.5"
-          fill="#00B4D8"
+          fill="#4ECDC4"
         >
           EXPERTS
-        </text>
-        {/* layer 1 tag */}
-        <text x={expertsX + expertsW / 2} y={bandTop - 10} textAnchor="middle" fontSize="9" fontWeight="700" letterSpacing="2" fill="#00B4D8" opacity="0.7">
-          LAYER 1
         </text>
 
         {/* AI column (Layer 2, smaller) */}
         <rect x={aiX} y={bandTop + 30} width={aiW} height={bandH - 60} rx="6" fill="url(#aiGrad)" />
-        <rect x={aiX} y={bandTop + 30} width={aiW} height={bandH - 60} rx="6" fill="none" stroke="#FF4D6D" strokeOpacity="0.55" strokeWidth="1.25" />
+        <rect x={aiX} y={bandTop + 30} width={aiW} height={bandH - 60} rx="6" fill="none" stroke="#E01C4A" strokeOpacity="0.55" strokeWidth="1.25" />
         <text
           x={aiX + aiW / 2}
           y={(bandTop + bandBottom) / 2}
           textAnchor="middle"
           transform={`rotate(-90, ${aiX + aiW / 2}, ${(bandTop + bandBottom) / 2})`}
-          fontSize="11"
+          fontSize="12"
           fontWeight="700"
           letterSpacing="3"
-          fill="#FF4D6D"
+          fill="#E01C4A"
         >
           AI
-        </text>
-        <text x={aiX + aiW / 2} y={bandTop + 18} textAnchor="middle" fontSize="9" fontWeight="700" letterSpacing="2" fill="#FF4D6D" opacity="0.7">
-          LAYER 2
         </text>
       </svg>
 

@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Lock, Library, Network, ListChecks, RefreshCcw } from 'lucide-react';
+import PlatypusMark from '../Brand/PlatypusMark';
 
 interface Pillar {
   n: string;
@@ -77,6 +78,11 @@ const TrustSection = () => {
           backgroundSize: '32px 32px',
         }}
       />
+
+      {/* Subtle platypus motif watermark on the dark section */}
+      <div className="hidden lg:block absolute right-[-40px] top-12 pointer-events-none">
+        <PlatypusMark size={260} opacity={0.08} />
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-10 md:mb-14 max-w-3xl">

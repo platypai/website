@@ -18,13 +18,13 @@
   }
 
   ::selection {
-    background-color: #FF4D6D;
+    background-color: #E01C4A;
     color: #fff;
   }
 
   /* Visible, brand-aligned focus rings */
   :focus-visible {
-    outline: 2px solid #00B4D8;
+    outline: 2px solid #4ECDC4;
     outline-offset: 3px;
     border-radius: 4px;
   }

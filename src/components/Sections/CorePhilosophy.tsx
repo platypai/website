@@ -122,10 +122,8 @@ const CorePhilosophy = () => {
           transition={{ duration: 0.55 }}
         >
           <span className="eyebrow mb-3 block">The Core Philosophy</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-navy leading-[1.05] mb-6 max-w-3xl">
-            AI output is becoming the norm.
-            <br />
-            Expert input is still scarce.
+          <h2 className="text-4xl md:text-5xl font-bold text-brand-navy leading-[1.05] mb-6 max-w-4xl">
+            AI output is becoming the norm. Expert input is still scarce.
           </h2>
           <div className="space-y-4 text-base md:text-lg text-brand-navy/75 max-w-4xl leading-relaxed">
             <p>
@@ -205,7 +203,7 @@ const TierCard = ({ tier, name, tagline, tone, dimensions, valueKey, featured }:
     balanced:
       'bg-white border-brand-navy/15 text-brand-navy',
     featured:
-      'bg-gradient-to-b from-brand-navy to-[#082037] border-brand-teal/30 text-white shadow-2xl lg:scale-[1.02]',
+      'bg-gradient-to-b from-brand-navy to-[#082843] border-brand-teal/30 text-white shadow-2xl lg:scale-[1.02]',
   } as const;
 
   const dimensionWrapper = {
